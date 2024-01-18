@@ -16,8 +16,8 @@ export const Navbar = () => {
 
             <div className="space-x-4">
                 <Link className="text-white " to={"/"}>Home</Link>
-                <Link className="text-white " to={"#"}>About</Link>
-                <Link className="text-white " to={"#"}>Services</Link>
+                <Link className="text-white " to={"/about-us"}>About</Link>
+                <Link className="text-white " to={"/services"}>Services</Link>
                 {isTokenExists() ? (
                     <>
                         <Link className="text-white " to={""}>Dashboard</Link>
