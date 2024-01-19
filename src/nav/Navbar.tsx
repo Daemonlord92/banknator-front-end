@@ -25,7 +25,8 @@ export const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        <Link className="text-white " to={""}>Login</Link>
+                        <Link className="text-white " to={"/login"}>Login</Link>
+                        <Link className="text-white" to={"/register"}>Register</Link>
                     </>
                 )}
             </div>

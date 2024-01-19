@@ -5,6 +5,8 @@ import {Navbar} from "./nav/Navbar.tsx";
 import {Footer} from "./static/Footer.tsx";
 import {About} from "./static/About.tsx";
 import {Services} from "./static/Services.tsx";
+import {Login} from "./auth/login/Login.tsx";
+import {Register} from "./auth/register/Register.tsx";
 
 function App() {
 
@@ -16,6 +18,8 @@ function App() {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/about-us" element={<About/>} />
                 <Route path="/services" element={<Services/>}/>
+                <Route path="/login" element={<Login/>}/>
+                <Route path="/register" element={<Register/>}/>
               </Routes>
           </div>
           <Footer/>
