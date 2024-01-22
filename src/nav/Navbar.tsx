@@ -1,12 +1,16 @@
 import {Link} from "react-router-dom";
 import logo from '../assets/logo-transparent-png.png'
 
-export const Navbar = () => {
+import {useDispatch, useSelector} from "react-redux";
+import AuthSlice, {selectIsAuth, logout} from "../redux/slices/authSlice.ts";
 
-    const isTokenExists = () => {
-        const token = sessionStorage.getItem('jwtToken');
-        return token !== null;
-    };
+export const Navbar = () => {
+    const isAuth = useSelector(selectIsAuth)
+    const dispatch = useDispatch()
+    const logoutLink = () => {
+        sessionStorage.removeItem("Authorization")
+        dispatch(logout())
+    }
 
     return (
         <nav className="bg-blue-500 p-4 flex items-center justify-between">
@@ -18,10 +22,10 @@ export const Navbar = () => {
                 <Link className="text-white " to={"/"}>Home</Link>
                 <Link className="text-white " to={"/about-us"}>About</Link>
                 <Link className="text-white " to={"/services"}>Services</Link>
-                {isTokenExists() ? (
+                {isAuth ? (
                     <>
                         <Link className="text-white " to={""}>Dashboard</Link>
-                        <Link className="text-white " to={""}>Logout</Link>
+                        <Link className="text-white " to={""} onClick={logoutLink}>Logout</Link>
                     </>
                 ) : (
                     <>

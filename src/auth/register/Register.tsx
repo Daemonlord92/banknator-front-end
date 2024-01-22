@@ -1,8 +1,11 @@
 import img from "../../assets/pexels-liliana-drew-8554373.jpg";
 import {useFormik} from "formik";
 import * as Yup from 'yup';
+import {useDispatch} from "react-redux";
+import {login} from "../../redux/slices/authSlice.ts";
 
 export const Register = () => {
+    const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -25,6 +28,7 @@ export const Register = () => {
             dateOfBirth: Yup.date().required('Required'),
         }),
         onSubmit: (values) => {
+
             async function postRegistration(data:never) {
                 try {
                     const response = await fetch("http://localhost:8080/apiv1/auth/register", {
@@ -37,6 +41,7 @@ export const Register = () => {
                     });
                     const result = await response.json();
                     sessionStorage.setItem("Authorization", result.token)
+                    dispatch(login(result.token))
                 }  catch (error) {
                     console.error("Login:PostLogin:", error)
                 }
