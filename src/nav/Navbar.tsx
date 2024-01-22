@@ -24,8 +24,8 @@ export const Navbar = () => {
                 <Link className="text-white " to={"/services"}>Services</Link>
                 {isAuth ? (
                     <>
-                        <Link className="text-white " to={""}>Dashboard</Link>
-                        <Link className="text-white " to={""} onClick={logoutLink}>Logout</Link>
+                        <Link className="text-white " to={"/dashboard"}>Dashboard</Link>
+                        <Link className="text-white " to={"/login"} onClick={logoutLink}>Logout</Link>
                     </>
                 ) : (
                     <>

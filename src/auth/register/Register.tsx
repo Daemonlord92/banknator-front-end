@@ -3,6 +3,7 @@ import {useFormik} from "formik";
 import * as Yup from 'yup';
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/slices/authSlice.ts";
+import {useNavigate} from "react-router-dom";
 
 interface PostNewUser {
     firstName: string,
@@ -17,6 +18,7 @@ interface PostNewUser {
 
 export const Register = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -53,6 +55,7 @@ export const Register = () => {
                     const result = await response.json();
                     sessionStorage.setItem("Authorization", result.token)
                     dispatch(login(result.token))
+                    navigate("/dashboard")
                 }  catch (error) {
                     console.error("Login:PostLogin:", error)
                 }

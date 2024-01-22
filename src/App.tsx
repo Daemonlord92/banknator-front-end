@@ -7,6 +7,8 @@ import {About} from "./static/About.tsx";
 import {Services} from "./static/Services.tsx";
 import {Login} from "./auth/login/Login.tsx";
 import {Register} from "./auth/register/Register.tsx";
+import {ProtectedRoute} from "./auth/protectedRoute.tsx";
+import {DashboardSelector} from "./shared/DashboardSelector.tsx";
 
 function App() {
 
@@ -20,6 +22,9 @@ function App() {
                 <Route path="/services" element={<Services/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
+                  <Route path={"/dashboard"} element={<ProtectedRoute>
+                      <DashboardSelector/>
+                  </ProtectedRoute>}/>
               </Routes>
           </div>
           <Footer/>

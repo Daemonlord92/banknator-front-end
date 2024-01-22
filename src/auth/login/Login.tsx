@@ -2,6 +2,7 @@ import img from '../../assets/pexels-tima-miroshnichenko-7567595.jpg';
 import {Formik, Form, Field} from "formik";
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/slices/authSlice.ts";
+import {useNavigate} from "react-router-dom";
 
 interface AuthRequest {
     email:string,
@@ -10,7 +11,7 @@ interface AuthRequest {
 
 export const Login = () => {
     const dispatch = useDispatch()
-
+    const navigate = useNavigate()
     const initialValues: AuthRequest = {
         email: '',
         password: ''
@@ -29,6 +30,7 @@ export const Login = () => {
             const result = await response.json();
             sessionStorage.setItem("Authorization", result.token)
             dispatch(login(result.token))
+            navigate("/dashboard")
         }  catch (error) {
             console.error("Login:PostLogin:", error)
         }
