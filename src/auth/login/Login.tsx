@@ -3,15 +3,20 @@ import {Formik, Form, Field} from "formik";
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/slices/authSlice.ts";
 
+interface AuthRequest {
+    email:string,
+    password:string
+}
+
 export const Login = () => {
     const dispatch = useDispatch()
 
-    const initialValues = {
+    const initialValues: AuthRequest = {
         email: '',
         password: ''
     };
 
-    async function postLogin(data:never) {
+    async function postLogin(data:AuthRequest) {
         try {
             const response = await fetch("http://localhost:8080/apiv1/auth/login", {
                 method: "POST",

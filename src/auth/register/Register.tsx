@@ -4,6 +4,17 @@ import * as Yup from 'yup';
 import {useDispatch} from "react-redux";
 import {login} from "../../redux/slices/authSlice.ts";
 
+interface PostNewUser {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string,
+    address: string,
+    phone: bigint,
+    creditScore: number,
+    dateOfBirth: string
+}
+
 export const Register = () => {
     const dispatch = useDispatch()
     const formik = useFormik({
@@ -13,8 +24,8 @@ export const Register = () => {
             email: '',
             password: '',
             address: '',
-            phone: '',
-            creditScore: '',
+            phone: 0n,
+            creditScore: 0,
             dateOfBirth: '',
         },
         validationSchema: Yup.object({
@@ -27,9 +38,9 @@ export const Register = () => {
             creditScore: Yup.number().required('Required'),
             dateOfBirth: Yup.date().required('Required'),
         }),
-        onSubmit: (values) => {
+        onSubmit: (values:PostNewUser) => {
 
-            async function postRegistration(data:never) {
+            async function postRegistration(data:PostNewUser) {
                 try {
                     const response = await fetch("http://localhost:8080/apiv1/auth/register", {
                         method: "POST",

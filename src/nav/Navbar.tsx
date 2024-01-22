@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import logo from '../assets/logo-transparent-png.png'
 
 import {useDispatch, useSelector} from "react-redux";
-import AuthSlice, {selectIsAuth, logout} from "../redux/slices/authSlice.ts";
+import {selectIsAuth, logout} from "../redux/slices/authSlice.ts";
 
 export const Navbar = () => {
     const isAuth = useSelector(selectIsAuth)
