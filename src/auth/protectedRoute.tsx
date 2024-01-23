@@ -4,7 +4,7 @@ import { Navigate} from "react-router-dom";
 
 
 
-export const ProtectedRoute = ({children}) => {
+export const ProtectedRoute = (x) => {
     const isAuth = useSelector(selectIsAuth)
-   return isAuth ? children : <Navigate to={"/login"} />
+   return isAuth ? x.children : <Navigate to={"/login"} />
 };

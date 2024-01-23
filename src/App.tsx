@@ -8,7 +8,7 @@ import {Services} from "./static/Services.tsx";
 import {Login} from "./auth/login/Login.tsx";
 import {Register} from "./auth/register/Register.tsx";
 import {ProtectedRoute} from "./auth/protectedRoute.tsx";
-import {DashboardSelector} from "./shared/DashboardSelector.tsx";
+import {DashboardSelector} from "./shared/dashboardSelector.tsx";
 
 function App() {
 

@@ -1,4 +1,3 @@
-import {Route} from "react-router-dom";
 import {jwtDecode} from 'jwt-decode'
 import {useSelector} from "react-redux";
 import {selectToken} from "../redux/slices/authSlice.ts";
