@@ -20,12 +20,12 @@ const AccountCarousel: React.FC<AccountCarouselProps> = ({ accounts }) => {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 3,
         slidesToScroll: 1,
     };
     console.log(accounts)
     return (
-        <Slider {...settings} className="mt-5 flex justify-between">
+        <Slider {...settings} className="mt-5 flex">
             {accounts.map((account) => (
                 <div key={account.id} className="bg-gray-200 p-4 rounded-lg">
                     <h3 className="text-xl font-bold mb-2">Account Number: {account.id}</h3>
