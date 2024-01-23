@@ -3,12 +3,14 @@ import logo from '../assets/logo-transparent-png.png'
 
 import {useDispatch, useSelector} from "react-redux";
 import {selectIsAuth, logout} from "../redux/slices/authSlice.ts";
+import {clearAccount} from "../redux/slices/accountSlice.ts";
 
 export const Navbar = () => {
     const isAuth = useSelector(selectIsAuth)
     const dispatch = useDispatch()
     const logoutLink = () => {
         sessionStorage.removeItem("Authorization")
+        dispatch(clearAccount())
         dispatch(logout())
     }
 
