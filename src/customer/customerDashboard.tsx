@@ -6,7 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {getAllAccount, selectAccounts} from "../redux/slices/accountSlice.ts";
 import {getAllTransactionsByAccountNumber, selectTransactions} from "../redux/slices/transactionSlice.ts";
 import {TransactionList} from "./component/transactionList.tsx";
-import {CreateAccount} from "./account/createAccount.tsx";
+import {CreateAccount} from "./component/createAccount.tsx";
+import CreateTransaction from "./component/createTransaction.tsx";
 
 export const CustomerDashboard = () => {
     const decode = jwtDecode(sessionStorage.getItem("Authorization") || '')
@@ -29,6 +30,7 @@ export const CustomerDashboard = () => {
     useEffect(() => {
         DataChange(false)
         getAllAccounts(decode.userProfileId)
+
     }, [dataChange]);
 
     const setTransactions= async (id:number) => {
@@ -42,7 +44,6 @@ export const CustomerDashboard = () => {
                 }
             })
         const result = await response.json()
-        console.table(result)
         dispatch(getAllTransactionsByAccountNumber(result))
     }
     const DataChange=(hasDataChanged:boolean)=> {
@@ -64,7 +65,7 @@ export const CustomerDashboard = () => {
                 <AccountCarousel accounts={accounts} setTransactions={setTransactions}/>
                 <div className="max-w-full flex align-text-bottom">
                     <h2 className="text-2xl font-bold mb-4 text-start w-1/2">Recent Transactions</h2>
-                    <Link to={"/newTransaction"} className="text-end w-1/2">Create new transaction</Link>
+                    <CreateTransaction setDataChange={DataChange}/>
                 </div>
                 {transactions.length > 0 ?
                  <TransactionList transactions={transactions}/> : null}

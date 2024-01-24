@@ -30,9 +30,22 @@ const AccountCarousel: React.FC<AccountCarouselProps> = ({ accounts, setTransact
             <Slider {...settings} className="mt-5">
                 {accounts.map((account,id) => (
                     <div key={id} className="bg-gray-200 p-4 rounded-lg"  onClick={() => setTransactions(account.id) }>
-                        <h3 className="text-xl font-bold mb-2">Account Number: {account.id}</h3>
-                        <p className="text-lg mb-2">Balance: ${account.balance}</p>
-                        <p className="text-lg">Type: {account.accountType}</p>
+                        <div className="flex flex-row flex-wrap">
+                            <div className="flex-col w-full">
+                                <h3 className="text-xl font-bold">Account Number: {account.id}</h3>
+                            </div>
+                            <div className="space-x-4 flex justify-between">
+                                <div className="flex-col">
+                                    <p className="text-lg mb-2">Balance: ${account.balance}</p>
+                                    <p className="text-lg mb-2">Type: {account.accountType.charAt(0) + account.accountType.slice(1).toLowerCase()}</p>
+                                </div>
+                                <div className="flex-col text-end">
+                                    {account.accountType == "LOAN" ?
+                                        <><p className="text-lg mb-2">Minimum pay: {account.minPay}</p><p
+                                            className="text-lg">Interest Rate: {account.interestRate}</p></> : null}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 ))}
             </Slider>

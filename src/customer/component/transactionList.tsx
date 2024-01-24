@@ -43,7 +43,7 @@ export const TransactionList:FC<TransactionsProps> = ({transactions}) => {
                                 (<td className="text-md">{transactions[index].fromId}</td>): <td></td>}
                             <td className="text-md">{transactions[index].toId}</td>
 
-                            <td className="text-md">{transactions[index].transactionType.charAt(0) + transactions[index].transactionType.slice(1).toLowerCase()}</td>
+                            <td className="text-md">{transactions[index].transactionType.charAt(0) + transactions[index].transactionType.slice(1).toLowerCase().replace("_", " ")}</td>
                             <td className="text-md">{transactions[index].transactionStatus.charAt(0) + transactions[index].transactionStatus.slice(1).toLowerCase()}</td>
                             <td className="text-lg font-bold">${transactions[index].amount}</td>
                     </animated.tr>

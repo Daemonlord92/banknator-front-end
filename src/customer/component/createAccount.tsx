@@ -1,4 +1,3 @@
-import {useState} from "react";
 import {Field, Form, Formik, FormikValues} from "formik";
 
 interface PostNewAccountInformation {
