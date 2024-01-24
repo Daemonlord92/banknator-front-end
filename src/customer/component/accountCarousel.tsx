@@ -24,18 +24,33 @@ const AccountCarousel: React.FC<AccountCarouselProps> = ({ accounts, setTransact
         slidesToShow: 3,
         slidesToScroll: 1,
     };
+
+    const disableAccount = async (id:number) => {
+        const response = await fetch("http://localhost:8080/apiv1/account/disableAccount?id="+id,
+            {
+                method:'PUT',
+                headers:{
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "http://localhost:5173",
+                    "Authorization": "Bearer "+sessionStorage.getItem("Authorization")
+                }
+            })
+        const result = await response.json()
+        window.alert(result.message)
+    }
+
     return (
         <>
 
             <Slider {...settings} className="mt-5">
                 {accounts.map((account,id) => (
-                    <div key={id} className="bg-gray-200 p-4 rounded-lg"  onClick={() => setTransactions(account.id) }>
+                    <div key={id} className="bg-gray-200 p-4 rounded-lg" >
                         <div className="flex flex-row flex-wrap">
                             <div className="flex-col w-full">
-                                <h3 className="text-xl font-bold">Account Number: {account.id}</h3>
+                                <h3 className="text-xl font-bold"  onClick={() => setTransactions(account.id) }>Account Number: {account.id}</h3>
                             </div>
-                            <div className="space-x-4 flex justify-between">
-                                <div className="flex-col">
+                            <div className="space-x-4 flex justify-between flex-wrap">
+                                <div className="flex-col text-start">
                                     <p className="text-lg mb-2">Balance: ${account.balance}</p>
                                     <p className="text-lg mb-2">Type: {account.accountType.charAt(0) + account.accountType.slice(1).toLowerCase()}</p>
                                 </div>
@@ -43,6 +58,11 @@ const AccountCarousel: React.FC<AccountCarouselProps> = ({ accounts, setTransact
                                     {account.accountType == "LOAN" ?
                                         <><p className="text-lg mb-2">Minimum pay: {account.minPay}</p><p
                                             className="text-lg">Interest Rate: {account.interestRate}</p></> : null}
+                                </div>
+                                <div className="flex-col w-max">
+                                    <button onClick={() =>disableAccount(account.id)} className="border border-b-red-600">
+                                        Close Account
+                                    </button>
                                 </div>
                             </div>
                         </div>

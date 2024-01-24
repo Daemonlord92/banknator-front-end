@@ -15,7 +15,7 @@ export const Navbar = () => {
     }
 
     return (
-        <nav className="bg-blue-500 p-4 flex items-center justify-between">
+        <nav className="bg-blue-500 p-4 flex items-center justify-between sticky top-0">
             <Link  to="/" className="text-white font-bold text-xl">
                 <img src={logo} alt="Banknator Logo" className="z-20 max-w-48 "/>
             </Link>

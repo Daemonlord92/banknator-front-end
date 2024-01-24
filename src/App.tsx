@@ -13,7 +13,7 @@ import {DashboardSelector} from "./shared/dashboardSelector.tsx";
 function App() {
 
   return (
-      <div className="mx-auto max-w-full">
+      <div className="mx-auto max-w-full container">
           <Navbar/>
           <div className="my-20">
               <Routes>
