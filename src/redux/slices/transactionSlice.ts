@@ -5,7 +5,7 @@ interface Transaction {
     amount: number;
     transactionType: string;
     transactionStatus:string;
-    date: string;
+    createdAt: string;
 }
 
 interface TransactionState {

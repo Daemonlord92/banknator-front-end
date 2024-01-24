@@ -59,6 +59,10 @@ export const CustomerDashboard = () => {
                     <Link to={"/createAccount"} className="text-end w-1/2">Create Account</Link>
                 </div>
                 <AccountCarousel accounts={accounts} setTransactions={setTransactions}/>
+                <div className="max-w-full flex align-text-bottom">
+                    <h2 className="text-2xl font-bold mb-4 text-start w-1/2">Recent Transactions</h2>
+                    <Link to={"/newTransaction"} className="text-end w-1/2">Create new transaction</Link>
+                </div>
                 {transactions.length > 0 ?
                  <TransactionList transactions={transactions}/> : null}
             </div>

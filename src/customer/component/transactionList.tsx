@@ -7,7 +7,7 @@ interface Transaction {
     amount: number;
     transactionType: string;
     transactionStatus:string;
-    date: string;
+    createdAt: string;
 }
 
 interface TransactionsProps {
@@ -24,20 +24,32 @@ export const TransactionList:FC<TransactionsProps> = ({transactions}) => {
 
     return (
         <div>
-            <h2 className="text-2xl font-bold mb-4">Recent Transactions</h2>
-            {trail.map((style, index) => (
-                <animated.div key={index} style={style} className="mb-2">
-                    <div className="border p-3 rounded-md">
-                        <p className="text-sm text-gray-500">{transactions[index].date}</p>
-                        {transactions[index].fromId > 0 ?
-                            (<p className="text-md">From Account Number: {transactions[index].fromId}</p>): null}
-                        <p className="text-md">To Account Number: {transactions[index].toId}</p>
-                        <p className="text-md">Transaction Type: {transactions[index].transactionType.charAt(0) + transactions[index].transactionType.slice(1).toLowerCase()}</p>
-                        <p className="text-md">Transaction Status: {transactions[index].transactionStatus.charAt(0) + transactions[index].transactionStatus.slice(1).toLowerCase()}</p>
-                        <p className="text-lg font-bold">Amount: ${transactions[index].amount}</p>
-                    </div>
-                </animated.div>
-            ))}
+            <table className="table-fixed p-3 rounded-md w-full">
+                <thead className="space-y-10">
+                    <tr>
+                        <th>Date</th>
+                        <th>From Id</th>
+                        <th>To Id</th>
+                        <th>Transaction Type</th>
+                        <th>Transaction Status</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {trail.map((style, index) => (
+                    <animated.tr key={index} style={style} className="m-4 hover:border-separate">
+                            <td className="text-md">{new Date(transactions[index].createdAt).toDateString()}</td>
+                            {transactions[index].fromId > 0 ?
+                                (<td className="text-md">{transactions[index].fromId}</td>): <td></td>}
+                            <td className="text-md">{transactions[index].toId}</td>
+
+                            <td className="text-md">{transactions[index].transactionType.charAt(0) + transactions[index].transactionType.slice(1).toLowerCase()}</td>
+                            <td className="text-md">{transactions[index].transactionStatus.charAt(0) + transactions[index].transactionStatus.slice(1).toLowerCase()}</td>
+                            <td className="text-lg font-bold">${transactions[index].amount}</td>
+                    </animated.tr>
+                ))}
+                </tbody>
+            </table>
             {transactions.length > 3 && (
                 <button
                     className="text-blue-500 mt-2 cursor-pointer"
