@@ -5,7 +5,8 @@ interface Account {
     accountType:string,
     balance:number,
     minPay:number,
-    interestRate:number
+    interestRate:number,
+    isActive:boolean
 }
 interface AccountState {
     accounts:Account[]

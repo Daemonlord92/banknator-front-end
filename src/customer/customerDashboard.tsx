@@ -1,5 +1,4 @@
 import AccountCarousel from "./component/accountCarousel.tsx";
-import {Link} from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
@@ -30,7 +29,6 @@ export const CustomerDashboard = () => {
     useEffect(() => {
         DataChange(false)
         getAllAccounts(decode.userProfileId)
-
     }, [dataChange]);
 
     const setTransactions= async (id:number) => {
@@ -62,7 +60,7 @@ export const CustomerDashboard = () => {
                     <h3 className="text-2xl font-bold text-start w-1/2">Accounts</h3>
                     <div className="text-end w-1/2"><CreateAccount id={decode.userProfileId} setDataChange={DataChange}/></div>
                 </div>
-                <AccountCarousel accounts={accounts} setTransactions={setTransactions}/>
+                <AccountCarousel accounts={accounts} setTransactions={setTransactions} setDataChange={DataChange}/>
                 <div className="max-w-full flex align-text-bottom">
                     <h2 className="text-2xl font-bold mb-4 text-start w-1/2">Recent Transactions</h2>
                     <CreateTransaction setDataChange={DataChange}/>

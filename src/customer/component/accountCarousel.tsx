@@ -8,14 +8,15 @@ interface Account {
     accountType:string,
     balance:number,
     minPay:number,
-    interestRate:number
+    interestRate:number,
+    isActive:boolean
 }
 
 interface AccountCarouselProps {
     accounts: Account[];
 }
 
-const AccountCarousel: React.FC<AccountCarouselProps> = ({ accounts, setTransactions = () =>{} }) => {
+const AccountCarousel: React.FC<AccountCarouselProps> = ({ accounts, setTransactions = () =>{}, setDataChange = (arg:boolean)=> {} }) => {
 
     const settings = {
         dots: true,
@@ -37,13 +38,14 @@ const AccountCarousel: React.FC<AccountCarouselProps> = ({ accounts, setTransact
             })
         const result = await response.json()
         window.alert(result.message)
+        setDataChange(true)
     }
-
     return (
         <>
 
             <Slider {...settings} className="mt-5">
                 {accounts.map((account,id) => (
+                    !account.isActive ?
                     <div key={id} className="bg-gray-200 p-4 rounded-lg" >
                         <div className="flex flex-row flex-wrap">
                             <div className="flex-col w-full">
@@ -60,13 +62,16 @@ const AccountCarousel: React.FC<AccountCarouselProps> = ({ accounts, setTransact
                                             className="text-lg">Interest Rate: {account.interestRate}</p></> : null}
                                 </div>
                                 <div className="flex-col w-max">
-                                    <button onClick={() =>disableAccount(account.id)} className="border border-b-red-600">
-                                        Close Account
-                                    </button>
+                                    {account.accountType != "CREDIT"?
+                                        <button onClick={() =>disableAccount(account.id)} className="border border-b-red-600">
+                                            Close Account
+                                        </button>
+                                    :null}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    : null
                 ))}
             </Slider>
         </>
