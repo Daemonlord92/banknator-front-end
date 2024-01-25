@@ -17,20 +17,29 @@ export const Login = () => {
         password: ''
     };
 
-    async function postLogin(data:AuthRequest) {
+    async function postLogin(data:AuthRequest, {resetForm} :{resetForm:()=>void }) {
         try {
-            const response = await fetch("http://localhost:8080/apiv1/auth/login", {
+            await fetch("http://localhost:8080/apiv1/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "http://localhost:5173"
                 },
                 body: JSON.stringify(data),
-            });
-            const result = await response.json();
-            sessionStorage.setItem("Authorization", result.token)
-            dispatch(login(result.token))
-            navigate("/dashboard")
+            }).then( async res => {
+                const result = await res.json()
+                if(result.ok) {
+                    sessionStorage.setItem("Authorization", result.token)
+                    dispatch(login(result.token))
+                    navigate("/dashboard")
+                }
+                if(result.statusCode == 400) {
+                    resetForm()
+                }
+            }).catch(err => {
+                window.alert(err.message())
+            })
+
         }  catch (error) {
             console.error("Login:PostLogin:", error)
         }

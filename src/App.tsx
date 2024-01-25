@@ -9,6 +9,7 @@ import {Login} from "./auth/login/Login.tsx";
 import {Register} from "./auth/register/Register.tsx";
 import {ProtectedRoute} from "./auth/protectedRoute.tsx";
 import {DashboardSelector} from "./shared/dashboardSelector.tsx";
+import {Settings} from "./setting/Settings.tsx";
 
 function App() {
 
@@ -24,6 +25,9 @@ function App() {
                 <Route path="/register" element={<Register/>}/>
                   <Route path={"/dashboard"} element={<ProtectedRoute>
                       <DashboardSelector/>
+                  </ProtectedRoute>}/>
+                  <Route path={"/settings"} element={<ProtectedRoute>
+                      <Settings/>
                   </ProtectedRoute>}/>
               </Routes>
           </div>

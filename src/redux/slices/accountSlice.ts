@@ -1,12 +1,12 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 interface Account {
-    accountId: number,
+    id: number,
     accountType:string,
     balance:number,
     minPay:number,
     interestRate:number,
-    isActive:boolean
+    isDisabled:boolean
 }
 interface AccountState {
     accounts:Account[]

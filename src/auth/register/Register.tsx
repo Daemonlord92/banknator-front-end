@@ -55,7 +55,7 @@ export const Register = () => {
                     const result = await response.json();
                     sessionStorage.setItem("Authorization", result.token)
                     dispatch(login(result.token))
-                    navigate("/dashboard")
+                    navigate("/login")
                 }  catch (error) {
                     console.error("Login:PostLogin:", error)
                 }

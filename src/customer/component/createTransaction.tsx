@@ -15,7 +15,13 @@ interface PostNewTransaction {
     transactionType: TransactionType
 }
 
-const CreateTransaction: React.FC = ({setDataChange}: {setDataChange: (arg0: boolean)=>void}) => {
+interface CreateTransactionProps {
+    setDataChange: (hasDataChanged: boolean) => void;
+}
+
+const CreateTransaction: React.FC<CreateTransactionProps> = ({  setDataChange }: {
+    setDataChange: (hasDataChanged: boolean) => void
+}) => {
     const initialValues:PostNewTransaction = {
         fromId: 0,
         toId: 0,
@@ -23,7 +29,7 @@ const CreateTransaction: React.FC = ({setDataChange}: {setDataChange: (arg0: boo
         transactionType: TransactionType.Withdraw,
     };
 
-    const handleSubmit = async (data:PostNewTransaction, {resetForm}) => {
+    const handleSubmit = async (data:PostNewTransaction, {resetForm} :{resetForm:()=>void }) => {
 
         const response = await fetch("http://localhost:8080/apiv1/transaction/", {
             method: "POST",

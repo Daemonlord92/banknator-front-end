@@ -1,15 +1,22 @@
 import AccountCarousel from "./component/accountCarousel.tsx";
-import {jwtDecode} from "jwt-decode";
-import React, {useEffect, useState} from "react";
+import {jwtDecode, JwtPayload} from "jwt-decode";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllAccount, selectAccounts} from "../redux/slices/accountSlice.ts";
 import {getAllTransactionsByAccountNumber, selectTransactions} from "../redux/slices/transactionSlice.ts";
 import {TransactionList} from "./component/transactionList.tsx";
 import {CreateAccount} from "./component/createAccount.tsx";
 import CreateTransaction from "./component/createTransaction.tsx";
+import {setUserInformation} from "../redux/slices/userSlice.ts";
 
+type EnhancedJwtPayload = JwtPayload & {
+    userProfileId:number,
+    firstName:string,
+    role:string,
+    ucId:number
+}
 export const CustomerDashboard = () => {
-    const decode = jwtDecode(sessionStorage.getItem("Authorization") || '')
+    const decode = jwtDecode<EnhancedJwtPayload>(sessionStorage.getItem("Authorization") || '')
     const dispatch = useDispatch()
     const accounts = useSelector(selectAccounts)
     const transactions = useSelector(selectTransactions)
@@ -26,10 +33,28 @@ export const CustomerDashboard = () => {
         const result = await response.json()
         dispatch(getAllAccount(result))
     }
+
+    useEffect(() => {
+        setUserData(decode.userProfileId)
+    }, []);
+
     useEffect(() => {
         DataChange(false)
         getAllAccounts(decode.userProfileId)
     }, [dataChange]);
+
+    async function setUserData(id:number) {
+        const response = await fetch("http://localhost:8080/apiv1/users/?id="+id, {
+            method:'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "http://localhost:5173",
+                "Authorization": "Bearer "+sessionStorage.getItem("Authorization")
+            }
+        })
+        const result = await response.json()
+        dispatch(setUserInformation(result))
+    }
 
     const setTransactions= async (id:number) => {
         const response = await fetch("http://localhost:8080/apiv1/transaction/"+id,
@@ -43,6 +68,21 @@ export const CustomerDashboard = () => {
             })
         const result = await response.json()
         dispatch(getAllTransactionsByAccountNumber(result))
+        DataChange(true)
+    }
+    const disableAccount = async (id:number) => {
+        const response = await fetch("http://localhost:8080/apiv1/account/disableAccount?id="+id,
+            {
+                method:'PUT',
+                headers:{
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "http://localhost:5173",
+                    "Authorization": "Bearer "+sessionStorage.getItem("Authorization")
+                }
+            })
+        const result = await response.json()
+        window.alert(result.message)
+        DataChange(true)
     }
     const DataChange=(hasDataChanged:boolean)=> {
         setDataChange(hasDataChanged)
@@ -58,9 +98,9 @@ export const CustomerDashboard = () => {
                 </div>
                 <div className="flex align-text-top">
                     <h3 className="text-2xl font-bold text-start w-1/2">Accounts</h3>
-                    <div className="text-end w-1/2"><CreateAccount id={decode.userProfileId} setDataChange={DataChange}/></div>
+                    <div className="text-end w-1/2"><CreateAccount id={decode.userProfileId} setDataChange={DataChange} /></div>
                 </div>
-                <AccountCarousel accounts={accounts} setTransactions={setTransactions} setDataChange={DataChange}/>
+                <AccountCarousel accounts={accounts} setTransactions={setTransactions} disableAccount={disableAccount} />
                 <div className="max-w-full flex align-text-bottom">
                     <h2 className="text-2xl font-bold mb-4 text-start w-1/2">Recent Transactions</h2>
                     <CreateTransaction setDataChange={DataChange}/>
