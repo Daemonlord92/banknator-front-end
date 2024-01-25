@@ -28,14 +28,13 @@ export const Login = () => {
                 body: JSON.stringify(data),
             }).then( async res => {
                 const result = await res.json()
-                if(result.ok) {
-                    sessionStorage.setItem("Authorization", result.token)
-                    dispatch(login(result.token))
-                    navigate("/dashboard")
-                }
                 if(result.statusCode == 400) {
                     resetForm()
+                    return
                 }
+                sessionStorage.setItem("Authorization", result.token)
+                dispatch(login(result.token))
+                navigate("/dashboard")
             }).catch(err => {
                 window.alert(err.message())
             })
