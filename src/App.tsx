@@ -10,6 +10,9 @@ import {Register} from "./auth/register/Register.tsx";
 import {ProtectedRoute} from "./auth/protectedRoute.tsx";
 import {DashboardSelector} from "./shared/dashboardSelector.tsx";
 import {Settings} from "./setting/Settings.tsx";
+import {HiringDashboard} from "./hiring/hiringDashboard.tsx";
+import {CustomerDashboard} from "./customer/customerDashboard.tsx";
+import {EmployeeDashboard} from "./employee/employeeDashboard.tsx";
 
 function App() {
 
@@ -26,8 +29,17 @@ function App() {
                   <Route path={"/dashboard"} element={<ProtectedRoute>
                       <DashboardSelector/>
                   </ProtectedRoute>}/>
+                  <Route path={"/dashboard/employee"} element={<ProtectedRoute>
+                      <EmployeeDashboard />
+                  </ProtectedRoute>}/>
+                  <Route path={"/dashboard/customer"} element={<ProtectedRoute>
+                      <CustomerDashboard />
+                  </ProtectedRoute>}/>
                   <Route path={"/settings"} element={<ProtectedRoute>
                       <Settings/>
+                  </ProtectedRoute>}/>
+                  <Route path={"/hiringDashboard"} element={<ProtectedRoute>
+                        <HiringDashboard />
                   </ProtectedRoute>}/>
               </Routes>
           </div>
