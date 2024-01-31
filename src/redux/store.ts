@@ -4,6 +4,7 @@ import accountSlice from "./slices/accountSlice.ts";
 import transactionSlice from "./slices/transactionSlice.ts";
 import userSlice from "./slices/userSlice.ts";
 import hiringSlice from "./slices/hiringSlice.ts";
+import bankSlice from "./slices/bankSlice.ts";
 
 const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
         account: accountSlice,
         transaction: transactionSlice,
         user: userSlice,
-        hiring: hiringSlice
+        hiring: hiringSlice,
+        bank: bankSlice
     }
 })
 
