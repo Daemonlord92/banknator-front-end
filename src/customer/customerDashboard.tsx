@@ -19,7 +19,7 @@ export const CustomerDashboard = () => {
     const transactions = useSelector(selectTransactions)
     const [dataChange, setDataChange] = useState(false)
     async function getAllAccounts(id:number) {
-        const response = await fetch("http://localhost:8080/apiv1/account/getAccountInformationByUser?id="+id,{
+        const response = await fetch(`${import.meta.env.API_URL}/account/getAccountInformationByUser?id=${id}`,{
             method:"GET",
             headers: {
                 "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export const CustomerDashboard = () => {
     }, [dataChange]);
 
     async function setUserData(id:number) {
-        const response = await fetch("http://localhost:8080/apiv1/users/?id="+id, {
+        const response = await fetch(`${import.meta.env.API_URL}/users/?id=${id}`, {
             method:'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export const CustomerDashboard = () => {
     }
 
     const setTransactions= async (id:number) => {
-        const response = await fetch("http://localhost:8080/apiv1/transaction/"+id,
+        const response = await fetch(`${import.meta.env.API_URL}/transaction/${id}`,
             {
                 method:'GET',
                 headers:{
@@ -69,7 +69,7 @@ export const CustomerDashboard = () => {
         DataChange(true)
     }
     const disableAccount = async (id:number) => {
-        const response = await fetch("http://localhost:8080/apiv1/account/disableAccount?id="+id,
+        const response = await fetch(`${import.meta.env.API_URL}/account/disableAccount?id=${id}`,
             {
                 method:'PUT',
                 headers:{

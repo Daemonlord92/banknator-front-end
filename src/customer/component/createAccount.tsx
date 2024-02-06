@@ -1,4 +1,4 @@
-import {Field, Form, Formik, FormikValues} from "formik";
+import {Field, Form, Formik} from "formik";
 
 interface PostNewAccountInformation {
     userProfileId:number,
@@ -9,8 +9,8 @@ interface PostNewAccountInformation {
 export const CreateAccount = ({id, setDataChange}:{id:number, setDataChange: (arg0: boolean)=>void }) => {
 
     const initialValues:PostNewAccountInformation = {userProfileId: id, accountType: "", balance:0.0}
-    const handleCreateAccount = async (data:PostNewAccountInformation, {resetForm}) => {
-        const response = await fetch("http://localhost:8080/apiv1/account/createNewAccount", {
+    const handleCreateAccount = async (data:PostNewAccountInformation, {resetForm}:{resetForm: () => void}) => {
+        const response = await fetch(`${import.meta.env.API_URL}/account/createNewAccount`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

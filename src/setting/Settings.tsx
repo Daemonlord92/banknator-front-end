@@ -26,7 +26,7 @@ export const Settings = () => {
     const user:User = useSelector(selectUser) as User
     const decode = jwtDecode<EnhancedJwtPayload>(sessionStorage.getItem("Authorization") || '')
     const postUpdateUser = async (data:User) => {
-        const response = await fetch("http://localhost:8080/apiv1/users/updateUser", {
+        const response = await fetch(`${import.meta.env.API_URL}/users/updateUser`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",

@@ -19,7 +19,7 @@ export const Login = () => {
 
     async function postLogin(data:AuthRequest, {resetForm} :{resetForm:()=>void }) {
         try {
-            await fetch("http://localhost:8080/apiv1/auth/login", {
+            await fetch(`${import.meta.env.API_URL}/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
