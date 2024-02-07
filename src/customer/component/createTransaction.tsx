@@ -31,7 +31,7 @@ const CreateTransaction: React.FC<CreateTransactionProps> = ({  setDataChange }:
 
     const handleSubmit = async (data:PostNewTransaction, {resetForm} :{resetForm:()=>void }) => {
 
-        const response = await fetch(`${import.meta.env.API_URL}/transaction/`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

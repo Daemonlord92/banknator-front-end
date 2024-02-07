@@ -19,7 +19,7 @@ export const Login = () => {
 
     async function postLogin(data:AuthRequest, {resetForm} :{resetForm:()=>void }) {
         try {
-            await fetch(`${import.meta.env.API_URL}/auth/login`, {
+            await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export const Login = () => {
                 dispatch(login(result.token))
                 navigate("/dashboard")
             }).catch(err => {
-                window.alert(err.message())
+                window.alert(err.message)
             })
 
         }  catch (error) {

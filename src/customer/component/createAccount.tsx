@@ -10,7 +10,7 @@ export const CreateAccount = ({id, setDataChange}:{id:number, setDataChange: (ar
 
     const initialValues:PostNewAccountInformation = {userProfileId: id, accountType: "", balance:0.0}
     const handleCreateAccount = async (data:PostNewAccountInformation, {resetForm}:{resetForm: () => void}) => {
-        const response = await fetch(`${import.meta.env.API_URL}/account/createNewAccount`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/account/createNewAccount`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

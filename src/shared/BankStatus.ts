@@ -1,0 +1,3 @@
+export enum BankStatus {
+    OPEN = "OPEN", CLOSE = "CLOSE", UNDER_CONSTRUCTION = "UNDER_CONSTRUCTION"
+}

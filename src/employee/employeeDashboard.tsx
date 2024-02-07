@@ -13,7 +13,7 @@ export const EmployeeDashboard = () => {
     }, []);
 
     async function setUserData(id:number) {
-        const response = await fetch(`${import.meta.env.API_URL}/users/?id=${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/users/?id=${id}`, {
             method:'GET',
             headers: {
                 "Content-Type": "application/json",
