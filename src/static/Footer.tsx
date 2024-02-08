@@ -1,8 +1,8 @@
 export const Footer = () => {
     const date = new Date().getFullYear()
     return (
-        <footer className="bg-blue-500 text-white py-4 mt-8 fixed bottom-0 w-1/2">
-            <div className="container mx-auto text-center">
+        <footer className="fixed bottom-0 left-0 z-20 w-full p-4 bg-blue-600 border-t border-gray-200 text-white shadow md:flex md:items-center md:justify-between md:p-6">
+            <div className="text-center w-fit">
                 &copy; {date} Banknator. All rights reserved.
             </div>
         </footer>

@@ -14,7 +14,7 @@ export const HiringDashboard = () => {
     const dispatch = useDispatch()
     const hiringApps = useSelector(selectHiring)
     const fetchHiringData = async (id:number) => {
-        await fetch(`${import.meta.env.API_URL}/hireapp/${id}`, {
+        await fetch(`${import.meta.env.VITE_API_URL}/hireapp/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

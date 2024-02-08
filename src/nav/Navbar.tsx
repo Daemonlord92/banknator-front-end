@@ -28,7 +28,7 @@ export const Navbar = () => {
     }
 
     return (
-        <nav className="bg-blue-500 p-4 flex items-center justify-between sticky top-0">
+        <nav className="fixed top-0 left-0 z-20 w-full p-4 bg-blue-500 text-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6">
             <Link  to="/" className="text-white font-bold text-xl">
                 <img src={logo} alt="Banknator Logo" className="z-20 max-w-48 "/>
             </Link>

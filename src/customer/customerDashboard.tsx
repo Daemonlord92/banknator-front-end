@@ -89,15 +89,15 @@ export const CustomerDashboard = () => {
         <>
             <div className="space-y-10">
 
-                <div className="flex align-text-top bg-blue-600 rounded-lg">
-                    <h1 className="text-4xl font-medium text-start w-1/2">
+                <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 md:flex justify-between bg-blue-500 rounded-lg align-middle">
+                    <h1 className="text-4xl font-medium text-start w-1/2 text-white">
                         Hi {decode.firstName}
                     </h1>
                     {decode.role == "ROLE_EMPLOYEE" ?
                         (
-                            <>
-                                <Link to={"/dashboard/employee"} className="text-end w-1/2" >Switch Dashboard</Link>
-                            </>
+                            <div className="w-1/2 text-end">
+                                <Link to={"/dashboard/employee"} className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-base font-medium" >Switch Dashboard</Link>
+                            </div>
                         ) : null
                     }
                 </div>

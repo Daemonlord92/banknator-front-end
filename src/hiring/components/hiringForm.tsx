@@ -40,7 +40,7 @@ export const HiringForm: React.FC<HiringFormProps> = ({setDataChange}) => {
     })
 
     const postHiringApp = async (data:PostNewHireApp) => {
-        await fetch(`${import.meta.env.API_URL}/hireapp/`, {
+        await fetch(`${import.meta.env.VITE_API_URL}/hireapp/`, {
             method:'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export const HiringForm: React.FC<HiringFormProps> = ({setDataChange}) => {
     }
 
     const fetchBankInfo = async () => {
-        await fetch(`${import.meta.env.API_URL}/bank/`, {
+        await fetch(`${import.meta.env.VITE_API_URL}/bank/`, {
             method:'GET',
             headers: {
                 "Content-Type": "application/json",

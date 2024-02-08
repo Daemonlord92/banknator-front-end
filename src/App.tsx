@@ -17,7 +17,7 @@ import {EmployeeDashboard} from "./employee/employeeDashboard.tsx";
 function App() {
 
   return (
-      <div className="mx-auto max-w-full container">
+      <div className="mx-auto container">
           <Navbar/>
           <div className="my-20">
               <Routes>

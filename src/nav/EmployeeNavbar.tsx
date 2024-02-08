@@ -6,7 +6,7 @@ export const EmployeeNavbar = ({setView}:{setView:(arg:string) => void}) => {
     const decode = jwtDecode<EnhancedJwtPayload>(sessionStorage.getItem("Authorization") || '')
     return (
         <div className="">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 md:flex justify-between align-text-bottom bg-blue-600 rounded-lg">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 md:flex justify-between align-text-bottom bg-blue-500 rounded-lg">
                 <Link
                     to={"#"}
                     onClick={() => setView("teller")}
