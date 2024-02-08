@@ -89,7 +89,7 @@ export const CustomerDashboard = () => {
         <>
             <div className="space-y-10">
 
-                <div className="flex align-text-top">
+                <div className="flex align-text-top bg-blue-600 rounded-lg">
                     <h1 className="text-4xl font-medium text-start w-1/2">
                         Hi {decode.firstName}
                     </h1>

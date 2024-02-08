@@ -4,5 +4,6 @@ export type EnhancedJwtPayload = JwtPayload & {
     userProfileId:number,
     firstName:string,
     role:string,
-    ucId:number
+    ucId:number,
+    position?:string
 }
