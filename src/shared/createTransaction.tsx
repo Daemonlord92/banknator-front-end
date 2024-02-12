@@ -1,5 +1,6 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
+import {BanknatorApi} from "./banknator-api.ts";
 
 enum TransactionType {
     Withdraw = 'WITHDRAW',
@@ -22,6 +23,7 @@ interface CreateTransactionProps {
 const CreateTransaction: React.FC<CreateTransactionProps> = ({  setDataChange }: {
     setDataChange: (hasDataChanged: boolean) => void
 }) => {
+    const api = new BanknatorApi();
     const initialValues:PostNewTransaction = {
         fromId: 0,
         toId: 0,
@@ -31,16 +33,7 @@ const CreateTransaction: React.FC<CreateTransactionProps> = ({  setDataChange }:
 
     const handleSubmit = async (data:PostNewTransaction, {resetForm} :{resetForm:()=>void }) => {
 
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/transaction/`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Access-Control-Allow-Origin": "http://localhost:5173",
-                "Authorization": "Bearer "+sessionStorage.getItem("Authorization")
-            },
-            body: JSON.stringify(data),
-        })
-        const result = await response.json();
+        const result = await (await api.createTransaction(data)).json();
         window.alert(result.message)
         resetForm()
         setDataChange(true)
